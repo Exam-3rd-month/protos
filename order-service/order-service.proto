@@ -18,7 +18,7 @@ service OrderService {
     // 7
     rpc ListOfOrders(ListOfOrdersRequest) returns (ListOfOrdersResponse);
     // 8
-    rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+    rpc GetOrderByKitchenId(GetOrderByKitchenIdRequest) returns (GetOrderByKitchenIdResponse);
     // 9
     rpc AddReview(AddReviewRequest) returns (AddReviewResponse);
     // 10
@@ -98,7 +98,7 @@ message DishRecommendations{
 }
 
 message Review{
-    string id = 1;
+    string review_id = 1;
     string user_name = 2;
     float rating = 3;
     string comment = 4;
@@ -116,7 +116,7 @@ message Dish {
 }
 
 message Order {
-    string id = 1;
+    string order_id = 1;
     string kitchen_id = 2;
     double total_amount = 3;
     string status = 4;
@@ -125,7 +125,7 @@ message Order {
 
 message OrderRequest {
     string dish_id = 1;
-    string quantity = 2;
+    int32 quantity = 2;
 }
 
 message OrderResponse {
@@ -199,10 +199,11 @@ message ListDishesResponse{
 
 // 5
 message CreateOrderRequest{
-    string kitchen_id = 1;
-    repeated OrderRequest items = 2;
-    string delivery_address = 3;
-    string delivery_time = 4;
+    string user_id = 1;
+    string kitchen_id = 2;
+    repeated OrderRequest items = 3;
+    string delivery_address = 4;
+    string delivery_time = 5;
 }
 message CreateOrderResponse{
     string order_id = 1;
@@ -240,10 +241,10 @@ message ListOfOrdersResponse{
 }
 
 // 8
-message GetOrderRequest{
+message GetOrderByKitchenIdRequest{
     string kitchen_id = 1;
 }
-message GetOrderResponse{
+message GetOrderByKitchenIdResponse{
     repeated Order orders = 1;
     int32 total = 2;
     int32 page = 3;
@@ -253,8 +254,10 @@ message GetOrderResponse{
 // 9
 message AddReviewRequest{
     string order_id = 1;
-    float rating = 2;
-    string comment = 3;
+    string user_id = 2; 
+    string kitchen_id = 3;
+    float rating = 4;
+    string comment = 5;
 }
 message AddReviewResponse{
     string rewiev_id = 1;
