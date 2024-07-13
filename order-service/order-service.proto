@@ -3,4 +3,399 @@ syntax = "proto3";
 option go_package = "genprotos/order_pb";
 
 service OrderService {
+    // 1
+    rpc AddDish(AddDishRequest) returns (AddDishResponse);
+    // 2
+    rpc UpdateDish(UpdateDishRequest) returns (UpdateDishResponse);
+    // 3
+    rpc DeleteDish(DeleteDishRequest) returns (DeleteDishResponse);
+    // 4
+    rpc ListDishes(ListDishesRequest) returns (ListDishesResponse);
+    // 5
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+    // 6
+    rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+    // 7
+    rpc ListOfOrders(ListOfOrdersRequest) returns (ListOfOrdersResponse);
+    // 8
+    rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+    // 9
+    rpc AddReview(AddReviewRequest) returns (AddReviewResponse);
+    // 10
+    rpc ListReviews(ListReviewsRequest) returns (ListReviewsResponse);
+    // 11
+    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+    // 12
+    rpc GetFullInfoAboutOrder(GetFullInfoAboutOrderRequest) returns (GetFullInfoAboutOrderResponse);
+
+    // Qo'shimchalar
+    // 1
+    rpc GetDishRecommendations(GetDishRecommendationsRequest) returns (GetDishRecommendationsResponse);
+    // 2
+    rpc GetKitchenStatistics(GetKitchenStatisticsRequest) returns (GetKitchenStatisticsResponse);
+    // 3
+    rpc GetUserActivity(GetUserActivityRequest) returns (GetUserActivityResponse);
+    // 4
+    rpc CreateKitchenWorkingHours(CreateKitchenWorkingHoursRequest) returns (CreateKitchenWorkingHoursResponse);
+    // 5
+    rpc UpdateKitchenWorkingHours(UpdateKitchenWorkingHoursRequest) returns (UpdateKitchenWorkingHoursResponse);
+    // 6
+    rpc CreateDishNutritionInfo(CreateDishNutritionInfoRequest) returns (CreateDishNutritionInfoResponse);
+    // 7
+    rpc UpdateDishNutritionInfo(UpdateDishNutritionInfoRequest) returns (UpdateDishNutritionInfoResponse);
+}
+
+message NutritionInfo{
+    string calories = 1;
+    string protein = 2;
+    string carbohydrates = 3;
+    string fat = 4;
+}
+
+message Allergens{
+    string name = 1;
+}
+
+message Dietary_info{
+    string name = 1;
+}
+
+message WorkingHoursByDay{
+    string day = 1;
+    string open_time = 2;
+    string close_time = 3;
+}
+
+message Favorite_cuisines{
+    string cuisine_type = 1;
+    int64 orders_count = 2;
+}
+
+message Favorite_kitchens{
+    string kitchen_id = 1;
+    string kitchen_name = 2;
+    int64 orders_count = 3;
+}
+
+message Busiest_hours{
+    string hour = 1;
+    int64 orders_count = 2;
+}
+
+message TopDish{
+    string dish_id = 1;
+    string name = 2;
+    int64 orders_count = 3;
+    string total_revenue = 4;
+}
+
+message DishRecommendations{
+    string dish_id = 1;
+    string name = 2;
+    string kitchen_name = 3;
+    double price = 4;
+    float rating = 5;
+}
+
+message Review{
+    string id = 1;
+    string user_name = 2;
+    float rating = 3;
+    string comment = 4;
+    string created_at = 5;
+}
+
+message Dish {
+    string dish_id = 1;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+    string category = 5;
+    repeated string ingredients = 6;
+    bool available = 7;
+}
+
+message Order {
+    string id = 1;
+    string kitchen_id = 2;
+    double total_amount = 3;
+    string status = 4;
+    string delivery_address = 5;
+}
+
+message OrderRequest {
+    string dish_id = 1;
+    string quantity = 2;
+}
+
+message OrderResponse {
+    string dish_id = 1;
+    string name = 2;
+    double price = 3;
+    string quantity = 4;
+}
+
+// 1
+message AddDishRequest {
+    string kitchen_id = 1;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+    string category = 5;
+    repeated string ingredients = 6;
+    bool available = 7;
+}
+message AddDishResponse {
+    string dish_id = 1;
+    string kitchen_id = 2;
+    string name = 3;
+    string description = 4;
+    double price = 5;
+    string category = 6;
+    repeated string ingredients = 7;
+    bool available = 8;
+    string created_at = 9;
+}
+
+// 2
+message UpdateDishRequest{
+    string kitchen_id = 1;
+    string dish_id = 2;
+    string name = 3;
+    string description = 4;
+    double price = 5;
+    string category = 6;
+    repeated string ingredients = 7;
+    bool available = 8;
+}
+message UpdateDishResponse{
+    string dish_id = 1;
+    string kitchen_id = 2;
+    string name = 3;
+    string description = 4;
+    double price = 5;
+    string category = 6;
+    repeated string ingredients = 7;
+    bool available = 8;
+    string updated_at = 9;
+}
+
+// 3
+message DeleteDishRequest{
+    string dish_id = 1;
+    string kitchen_id = 2;
+}
+message DeleteDishResponse{
+    string message = 1;
+}
+
+// 4
+message ListDishesRequest{
+    string kitchen_id = 1;
+}
+message ListDishesResponse{
+    repeated Dish dishes = 1;
+}
+
+// 5
+message CreateOrderRequest{
+    string kitchen_id = 1;
+    repeated OrderRequest items = 2;
+    string delivery_address = 3;
+    string delivery_time = 4;
+}
+message CreateOrderResponse{
+    string order_id = 1;
+    string user_id = 2;
+    string kitchen_id = 3;
+    repeated OrderResponse items = 4;
+    double total_amount = 5;
+    string status = 6;
+    string delivery_address = 7;
+    string delivery_time = 8;
+    string created_at = 9;
+}
+
+// 6
+message UpdateOrderStatusRequest{
+    string order_id = 1;
+    string status = 2;
+}
+
+message UpdateOrderStatusResponse{
+    string order_id = 1;
+    string status = 2;
+    string updated_at = 3;
+}
+
+// 7
+message ListOfOrdersRequest{
+    string user_id = 1;
+}
+message ListOfOrdersResponse{
+    repeated Order orders = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+// 8
+message GetOrderRequest{
+    string kitchen_id = 1;
+}
+message GetOrderResponse{
+    repeated Order orders = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+// 9
+message AddReviewRequest{
+    string order_id = 1;
+    float rating = 2;
+    string comment = 3;
+}
+message AddReviewResponse{
+    string rewiev_id = 1;
+    string order_id = 2;
+    string user_id = 3;
+    string kitchen_id = 4;
+    float rating = 5;
+    string comment = 6;
+    string created_at = 7;
+}
+
+// 10
+message ListReviewsRequest{
+    string kitchen_id = 1;
+}
+message ListReviewsResponse{
+    repeated Review reviews = 1;
+    int32 total = 2;
+    float average_rating = 3;
+    int32 page = 4;
+    int32 limit = 5;
+}
+
+// 11
+message CreatePaymentRequest{
+    string order_id = 1;
+    string payment_method = 2;
+    string card_number = 3;
+    string expire_date = 4;
+    string cvv = 5;
+}
+message CreatePaymentResponse{
+    string payment_id = 1;
+    string order_id = 2;
+    double amount = 3;
+    string status = 4;
+    string transaction_id = 5;
+    string created_at = 6;
+}
+
+// 12
+message GetFullInfoAboutOrderRequest{
+    string order_id = 1;
+}
+message GetFullInfoAboutOrderResponse{
+    string order_id = 1;
+    string kitchen_id = 2;
+    string user_id = 3;
+    string kitchen_name = 4;
+    repeated OrderResponse orders = 5;
+    int32 total_amount = 6;
+    string status = 7;
+    string dilivery_address = 8;
+    string delivery_time = 9;
+    string created_at = 10;
+    string updated_at = 11;
+}
+
+// 2.1
+message GetDishRecommendationsRequest{}
+message GetDishRecommendationsResponse{
+    repeated DishRecommendations dish_recommendations = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
+}
+
+// 2.2
+message GetKitchenStatisticsRequest{
+    string kitchen_id = 1;
+}
+message GetKitchenStatisticsResponse{
+    string total_orders = 1;
+    string total_revenue = 2;
+    float average_rating = 3;
+    repeated TopDish top_dishes = 4;
+    repeated Busiest_hours busiest_hours = 5;
+}
+
+// 2.3
+message GetUserActivityRequest{
+    string user_id = 1;
+}
+message GetUserActivityResponse{
+    int64 total_orders = 1;
+    string total_spent = 2;
+    repeated Favorite_cuisines favorite_cuisines = 3;
+    repeated Favorite_kitchens favorite_kitchens = 4;
+}
+
+// 2.4
+message CreateKitchenWorkingHoursRequest{
+    string kitchen_id = 1;
+    repeated WorkingHoursByDay working_hours = 2;
+}
+message CreateKitchenWorkingHoursResponse{
+    string kitchen_id = 1;
+    repeated WorkingHoursByDay working_hours = 2;
+    string created_at = 3;
+}
+
+// 2.5
+message UpdateKitchenWorkingHoursRequest{
+    string kitchen_id = 1;
+    repeated WorkingHoursByDay working_hours = 2;
+}
+message UpdateKitchenWorkingHoursResponse{
+    string kitchen_id = 1;
+    repeated WorkingHoursByDay working_hours = 2;
+    string updated_at = 3;
+}
+
+// 2.6
+message CreateDishNutritionInfoRequest{
+    string dish_id = 1;
+    repeated Allergens allergens = 2;
+    repeated NutritionInfo nutrition_info = 3;
+    repeated Dietary_info dietary_info = 4;
+}
+message CreateDishNutritionInfoResponse{
+    string dish_id = 1;
+    string name = 2;
+    repeated Allergens allergens = 3;
+    repeated NutritionInfo nutrition_info = 4;
+    repeated Dietary_info dietary_info = 5;
+    string created_at = 6;
+}
+
+// 2.7
+message UpdateDishNutritionInfoRequest{
+    string dish_id = 1;
+    repeated Allergens allergens = 2;
+    repeated NutritionInfo nutrition_info = 3;
+    repeated Dietary_info dietary_info = 4;
+}
+
+message UpdateDishNutritionInfoResponse{
+    string dish_id = 1;
+    string name = 2;
+    repeated Allergens allergens = 3;
+    repeated NutritionInfo nutrition_info = 4;
+    repeated Dietary_info dietary_info = 5;
+    string created_at = 6;
 }
