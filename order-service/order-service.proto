@@ -3,6 +3,7 @@ syntax = "proto3";
 option go_package = "genprotos/order_pb";
 
 service OrderService {
+    // Dish
     // 1
     rpc AddDish(AddDishRequest) returns (AddDishResponse);
     // 2
@@ -12,6 +13,8 @@ service OrderService {
     // 4
     rpc ListDishes(ListDishesRequest) returns (ListDishesResponse);
     // 5
+
+    // Order
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
     // 6
     rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
@@ -108,11 +111,9 @@ message Review{
 message Dish {
     string dish_id = 1;
     string name = 2;
-    string description = 3;
-    double price = 4;
-    string category = 5;
-    repeated string ingredients = 6;
-    bool available = 7;
+    double price = 3;
+    string category = 4;
+    bool available = 5;
 }
 
 message Order {
@@ -192,9 +193,14 @@ message DeleteDishResponse{
 // 4
 message ListDishesRequest{
     string kitchen_id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }
 message ListDishesResponse{
     repeated Dish dishes = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 limit = 4;
 }
 
 // 5
