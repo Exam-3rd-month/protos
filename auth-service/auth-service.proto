@@ -93,6 +93,7 @@ message UpdateProfileResponse {
 
 message ResetPasswordRequest {
   string email = 1;
+  string password = 2;
 }
 
 message ResetPasswordResponse {
