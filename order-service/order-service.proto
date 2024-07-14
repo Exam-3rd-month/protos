@@ -4,27 +4,27 @@ option go_package = "genprotos/order_pb";
 
 service OrderService {
     // Dish
-    // 1
-    rpc AddDish(AddDishRequest) returns (AddDishResponse);
-    // 2
+    // 1 Done
+    rpc AddDish(AddDishRequest) returns (AddDishResponse); 
+    // 2 Done 
     rpc UpdateDish(UpdateDishRequest) returns (UpdateDishResponse);
-    // 3
+    // 3 Done
     rpc DeleteDish(DeleteDishRequest) returns (DeleteDishResponse);
-    // 4
+    // 4 Done
     rpc ListDishes(ListDishesRequest) returns (ListDishesResponse);
-    // 5
 
     // Order
+    // 5 Done
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-    // 6
+    // 6 Done
     rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
-    // 7
+    // 7 Done
     rpc ListOfOrders(ListOfOrdersRequest) returns (ListOfOrdersResponse);
-    // 8
+    // 8 Done
     rpc GetOrderByKitchenId(GetOrderByKitchenIdRequest) returns (GetOrderByKitchenIdResponse);
-    // 9
+    // 9 Done
     rpc AddReview(AddReviewRequest) returns (AddReviewResponse);
-    // 10
+    // 10 Done
     rpc ListReviews(ListReviewsRequest) returns (ListReviewsResponse);
     // 11
     rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
@@ -43,8 +43,6 @@ service OrderService {
     // 5
     rpc UpdateKitchenWorkingHours(UpdateKitchenWorkingHoursRequest) returns (UpdateKitchenWorkingHoursResponse);
     // 6
-    rpc CreateDishNutritionInfo(CreateDishNutritionInfoRequest) returns (CreateDishNutritionInfoResponse);
-    // 7
     rpc UpdateDishNutritionInfo(UpdateDishNutritionInfoRequest) returns (UpdateDishNutritionInfoResponse);
 }
 
@@ -122,6 +120,7 @@ message Order {
     double total_amount = 3;
     string status = 4;
     string delivery_address = 5;
+    string created_at = 6;
 }
 
 message OrderRequest {
@@ -238,6 +237,8 @@ message UpdateOrderStatusResponse{
 // 7
 message ListOfOrdersRequest{
     string user_id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }
 message ListOfOrdersResponse{
     repeated Order orders = 1;
@@ -249,6 +250,8 @@ message ListOfOrdersResponse{
 // 8
 message GetOrderByKitchenIdRequest{
     string kitchen_id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }
 message GetOrderByKitchenIdResponse{
     repeated Order orders = 1;
@@ -278,6 +281,8 @@ message AddReviewResponse{
 // 10
 message ListReviewsRequest{
     string kitchen_id = 1;
+    int32 page = 2;
+    int32 limit = 3;
 }
 message ListReviewsResponse{
     repeated Review reviews = 1;
@@ -312,18 +317,20 @@ message GetFullInfoAboutOrderResponse{
     string order_id = 1;
     string kitchen_id = 2;
     string user_id = 3;
-    string kitchen_name = 4;
-    repeated OrderResponse orders = 5;
-    int32 total_amount = 6;
-    string status = 7;
-    string dilivery_address = 8;
-    string delivery_time = 9;
-    string created_at = 10;
-    string updated_at = 11;
+    // repeated OrderRequest orders = 4;
+    // double total_amount = 5;
+    string status = 4;
+    string dilivery_address = 5;
+    string delivery_time = 6;
+    string created_at = 7;
+    string updated_at = 8;
 }
 
 // 2.1
-message GetDishRecommendationsRequest{}
+message GetDishRecommendationsRequest{
+    string page = 1;
+    int32 limit = 2;
+}
 message GetDishRecommendationsResponse{
     repeated DishRecommendations dish_recommendations = 1;
     int32 total = 2;
@@ -377,22 +384,6 @@ message UpdateKitchenWorkingHoursResponse{
 }
 
 // 2.6
-message CreateDishNutritionInfoRequest{
-    string dish_id = 1;
-    repeated Allergens allergens = 2;
-    repeated NutritionInfo nutrition_info = 3;
-    repeated Dietary_info dietary_info = 4;
-}
-message CreateDishNutritionInfoResponse{
-    string dish_id = 1;
-    string name = 2;
-    repeated Allergens allergens = 3;
-    repeated NutritionInfo nutrition_info = 4;
-    repeated Dietary_info dietary_info = 5;
-    string created_at = 6;
-}
-
-// 2.7
 message UpdateDishNutritionInfoRequest{
     string dish_id = 1;
     repeated Allergens allergens = 2;
