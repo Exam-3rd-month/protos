@@ -3,29 +3,29 @@ syntax = "proto3";
 option go_package = "genprotos/auth_pb";
 
 service AuthService {
-    // 1
+    // 1 Done
     rpc Register(RegisterRequest) returns (RegisterResponse);
-    // 2
+    // 2 
     rpc Login(LoginRequest) returns (LoginResponse);
-    // 3
+    // 3 Done
     rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
-    // 4
+    // 4 Done
     rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
-    // 5
+    // 5 Done
     rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
     // 6
     rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
     // 7
     rpc Logout(LogoutRequest) returns (LogoutResponse);
-    // 8
+    // 8 Done
     rpc CreateKitchen(CreateKitchenRequest) returns (CreateKitchenResponse);
-    // 9
+    // 9 Done
     rpc UpdateKitchen(UpdateKitchenRequest) returns (UpdateKitchenResponse);
-    // 10
+    // 10 Done
     rpc GetKitchen(GetKitchenRequest) returns (GetKitchenResponse);
-    // 11
+    // 11 Done
     rpc ListKitchens(ListKitchensRequest) returns (ListKitchensResponse);
-    // 12
+    // 12 Done
     rpc SearchKitchens(SearchKitchensRequest) returns (SearchKitchensResponse);
 }
 
@@ -196,9 +196,7 @@ message ListKitchensResponse {
 }
 
 message SearchKitchensRequest {
-  string query = 1;
-  string cuisine_type = 2;
-  float rating = 3;
+  string name = 1;
   int32 page = 4;
   int32 limit = 5;
 }
