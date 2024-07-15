@@ -13,9 +13,7 @@ service AuthService {
     rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
     // 5 Done
     rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
-    // 6
-    rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
-    // 7
+    // 7 
     rpc Logout(LogoutRequest) returns (LogoutResponse);
     // 8 Done
     rpc CreateKitchen(CreateKitchenRequest) returns (CreateKitchenResponse);
@@ -33,6 +31,16 @@ service AuthService {
     rpc DoesUserExist(DoesUserExistRequest) returns (DoesUserExistResponse);
     // 14 Done
     rpc DoesKitchenExist(DoesKitchenExistRequest) returns (DoesKitchenExistResponse);
+    // 15
+    rpc IsValidToken(IsValidTokenRequest) returns (IsValidTokenResponse);
+}
+
+message IsValidTokenRequest{
+  string user_id = 1;
+}
+
+message IsValidTokenResponse{
+  bool valid = 1;
 }
 
 message RegisterRequest {
@@ -104,17 +112,9 @@ message ResetPasswordResponse {
   string message = 1;
 }
 
-message RefreshTokenRequest {
-  string refresh_token = 1;
+message LogoutRequest {
+  string user_id = 1;
 }
-
-message RefreshTokenResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  int32 expires_in = 3;
-}
-
-message LogoutRequest {}
 
 message LogoutResponse {
   string message = 1;
