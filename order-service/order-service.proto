@@ -26,9 +26,9 @@ service OrderService {
     rpc AddReview(AddReviewRequest) returns (AddReviewResponse);
     // 10 Done
     rpc ListReviews(ListReviewsRequest) returns (ListReviewsResponse);
-    // 11
+    // 11 Done
     rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
-    // 12
+    // 12 
     rpc GetFullInfoAboutOrder(GetFullInfoAboutOrderRequest) returns (GetFullInfoAboutOrderResponse);
 
     // Qo'shimchalar
