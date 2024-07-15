@@ -27,6 +27,12 @@ service AuthService {
     rpc ListKitchens(ListKitchensRequest) returns (ListKitchensResponse);
     // 12 Done
     rpc SearchKitchens(SearchKitchensRequest) returns (SearchKitchensResponse);
+
+    // Yordamchi funksiyalar
+    // 13 Done
+    rpc DoesUserExist(DoesUserExistRequest) returns (DoesUserExistResponse);
+    // 14 Done
+    rpc DoesKitchenExist(DoesKitchenExistRequest) returns (DoesKitchenExistResponse);
 }
 
 message RegisterRequest {
@@ -53,8 +59,6 @@ message LoginRequest {
 
 message LoginResponse {
   string access_token = 1;
-  string refresh_token = 2;
-  int32 expires_in = 3;
 }
 
 message GetProfileRequest {
@@ -206,4 +210,20 @@ message SearchKitchensResponse {
   int32 total = 2;
   int32 page = 3;
   int32 limit = 4;
+}
+
+// 13
+message DoesUserExistRequest{
+  string user_id = 1;
+}
+message DoesUserExistResponse{
+  bool exists = 1;
+}
+
+// 14
+message DoesKitchenExistRequest{
+  string kitchen_id = 1;
+}
+message DoesKitchenExistResponse{
+  bool exists = 1;
 }
