@@ -34,15 +34,13 @@ service OrderService {
     // Qo'shimchalar
     // 1
     rpc GetDishRecommendations(GetDishRecommendationsRequest) returns (GetDishRecommendationsResponse);
-    // 2
+    // 2 
     rpc GetKitchenStatistics(GetKitchenStatisticsRequest) returns (GetKitchenStatisticsResponse);
-    // 3
+    // 3 
     rpc GetUserActivity(GetUserActivityRequest) returns (GetUserActivityResponse);
-    // 4
+    // 4 Done
     rpc CreateKitchenWorkingHours(CreateKitchenWorkingHoursRequest) returns (CreateKitchenWorkingHoursResponse);
-    // 5
-    rpc UpdateKitchenWorkingHours(UpdateKitchenWorkingHoursRequest) returns (UpdateKitchenWorkingHoursResponse);
-    // 6
+    // 5 
     rpc UpdateDishNutritionInfo(UpdateDishNutritionInfoRequest) returns (UpdateDishNutritionInfoResponse);
 }
 
@@ -303,10 +301,11 @@ message CreatePaymentRequest{
 message CreatePaymentResponse{
     string payment_id = 1;
     string order_id = 2;
-    double amount = 3;
-    string status = 4;
-    string transaction_id = 5;
-    string created_at = 6;
+    string kitchen_id = 3;
+    double amount = 4;
+    string status = 5;
+    string transaction_id = 6;
+    string created_at = 7;
 }
 
 // 12
