@@ -35,6 +35,18 @@ service AuthService {
     rpc IsValidToken(IsValidTokenRequest) returns (IsValidTokenResponse);
     // 16
     rpc IncrementTotalOrders(IncrementTotalOrdersRequest) returns (IncrementTotalOrdersResponse);
+    // 17
+    rpc IncrementOrderRating(IncrementOrderRatingRequest) returns (IncrementOrderRatingResponse);
+}
+
+// 17
+message IncrementOrderRatingRequest{
+  string kitchen_id = 1;
+  float rating = 2;
+}
+
+message IncrementOrderRatingResponse{
+  string ok = 1;
 }
 
 // 16
