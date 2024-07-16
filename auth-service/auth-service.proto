@@ -33,12 +33,23 @@ service AuthService {
     rpc DoesKitchenExist(DoesKitchenExistRequest) returns (DoesKitchenExistResponse);
     // 15
     rpc IsValidToken(IsValidTokenRequest) returns (IsValidTokenResponse);
+    // 16
+    rpc IncrementTotalOrders(IncrementTotalOrdersRequest) returns (IncrementTotalOrdersResponse);
 }
 
+// 16
+message IncrementTotalOrdersRequest{
+  string kitchen_id = 1;
+  int32 total_orders = 2;
+}
+
+message IncrementTotalOrdersResponse{
+  string ok = 1;
+}
+// 15
 message IsValidTokenRequest{
   string user_id = 1;
 }
-
 message IsValidTokenResponse{
   bool valid = 1;
 }
