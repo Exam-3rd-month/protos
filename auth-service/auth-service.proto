@@ -37,6 +37,28 @@ service AuthService {
     rpc IncrementTotalOrders(IncrementTotalOrdersRequest) returns (IncrementTotalOrdersResponse);
     // 17
     rpc IncrementOrderRating(IncrementOrderRatingRequest) returns (IncrementOrderRatingResponse);
+    // 18
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+    // 19
+    rpc DeleteKitchen(DeleteKitchenRequest) returns (DeleteKitchenResponse);
+}
+
+// 19
+message DeleteKitchenRequest{
+  string kitchen_id = 1;
+}
+
+message DeleteKitchenResponse{
+  string ok = 1;
+}
+
+// 18
+message DeleteUserRequest{
+  string user_id = 1;
+}
+
+message DeleteUserResponse{
+  string ok = 1;
 }
 
 // 17
