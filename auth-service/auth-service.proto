@@ -41,6 +41,17 @@ service AuthService {
     rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
     // 19
     rpc DeleteKitchen(DeleteKitchenRequest) returns (DeleteKitchenResponse);
+    // 20
+    rpc IsValidUser(IsValidUserRequest) returns (IsValidUserResponse);
+}
+
+// 10
+message IsValidUserRequest{
+  string email = 1;
+}
+
+message IsValidUserResponse{
+  bool valid = 1;
 }
 
 // 19
@@ -150,7 +161,9 @@ message UpdateProfileResponse {
 
 message ResetPasswordRequest {
   string email = 1;
-  string password = 2;
+  string verify_code = 2;
+  string new_password = 3;
+  string confirm_password = 4;
 }
 
 message ResetPasswordResponse {
