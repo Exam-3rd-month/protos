@@ -36,11 +36,11 @@ service OrderService {
     rpc GetDishRecommendations(GetDishRecommendationsRequest) returns (GetDishRecommendationsResponse);
     // 2 
     rpc GetKitchenStatistics(GetKitchenStatisticsRequest) returns (GetKitchenStatisticsResponse);
-    // 3 
+    // 3 Done
     rpc GetUserActivity(GetUserActivityRequest) returns (GetUserActivityResponse);
     // 4 Done
     rpc CreateKitchenWorkingHours(CreateKitchenWorkingHoursRequest) returns (CreateKitchenWorkingHoursResponse);
-    // 5 
+    // 5 Done
     rpc UpdateDishNutritionInfo(UpdateDishNutritionInfoRequest) returns (UpdateDishNutritionInfoResponse);
 }
 
@@ -63,17 +63,6 @@ message WorkingHoursByDay{
     string day = 1;
     string open_time = 2;
     string close_time = 3;
-}
-
-message Favorite_cuisines{
-    string cuisine_type = 1;
-    int64 orders_count = 2;
-}
-
-message Favorite_kitchens{
-    string kitchen_id = 1;
-    string kitchen_name = 2;
-    int64 orders_count = 3;
 }
 
 message Busiest_hours{
@@ -356,8 +345,6 @@ message GetUserActivityRequest{
 message GetUserActivityResponse{
     int64 total_orders = 1;
     string total_spent = 2;
-    repeated Favorite_cuisines favorite_cuisines = 3;
-    repeated Favorite_kitchens favorite_kitchens = 4;
 }
 
 // 2.4
@@ -372,17 +359,6 @@ message CreateKitchenWorkingHoursResponse{
 }
 
 // 2.5
-message UpdateKitchenWorkingHoursRequest{
-    string kitchen_id = 1;
-    repeated WorkingHoursByDay working_hours = 2;
-}
-message UpdateKitchenWorkingHoursResponse{
-    string kitchen_id = 1;
-    repeated WorkingHoursByDay working_hours = 2;
-    string updated_at = 3;
-}
-
-// 2.6
 message UpdateDishNutritionInfoRequest{
     string dish_id = 1;
     repeated Allergens allergens = 2;
@@ -396,5 +372,5 @@ message UpdateDishNutritionInfoResponse{
     repeated Allergens allergens = 3;
     repeated NutritionInfo nutrition_info = 4;
     repeated Dietary_info dietary_info = 5;
-    string created_at = 6;
+    string updated_at = 6;
 }
