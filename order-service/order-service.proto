@@ -316,8 +316,9 @@ message GetFullInfoAboutOrderResponse{
 
 // 2.1
 message GetDishRecommendationsRequest{
-    string page = 1;
-    int32 limit = 2;
+    string kitchen_id = 1;
+    string page = 2;
+    int32 limit = 3;
 }
 message GetDishRecommendationsResponse{
     repeated DishRecommendations dish_recommendations = 1;
